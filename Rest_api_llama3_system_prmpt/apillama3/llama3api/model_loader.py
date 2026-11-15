@@ -1,3 +1,4 @@
+import os
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 #from databrickschatbotapi.DatascientistPipeline.Graph_description import GraphDescriptionPipeline
@@ -17,9 +18,9 @@ def load_all_models():
     # Load your model here, e.g., Hugging Face model
     device = "cuda" if torch.cuda.is_available() else "cpu"
     #tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf", use_fast=True, device=device,)
-    llm_model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct", device_map='auto', use_auth_token="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")
+    llm_model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct", device_map='auto', use_auth_token=os.environ.get("HF_TOKEN"))
 
-    # llm_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf", device_map='auto', torch_dtype=torch.float16,use_auth_token="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")
+    # llm_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf", device_map='auto', torch_dtype=torch.float16,use_auth_token=os.environ.get("HF_TOKEN"))
 #    quantization_config = BitsAndBytesConfig(
 #            load_in_4bit=True,
 #            bnb_4bit_compute_dtype=torch.float16,
